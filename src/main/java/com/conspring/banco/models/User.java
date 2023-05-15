@@ -2,20 +2,24 @@ package com.conspring.banco.models;
 
 import lombok.Builder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class User {
 
     //conecta con capa de presentaicón, front
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String username;
     private String password;
+
+
+    //@Column(name = "FECHA") // nombre de columna en BBDD
+    //@Temporal(TemporalType.TIMESTAMP) //reemplaza el Date de Java
+    //private Date date;
+
 
 
     public User(String username, String password) {

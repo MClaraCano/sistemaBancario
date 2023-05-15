@@ -24,15 +24,15 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getUsers(){
-        List<User> usuarios = userService.getUsers();
-        return ResponseEntity.status(200).body(usuarios);
+    public ResponseEntity<List<UserDto>> getUsersDto(){
+        List<UserDto> usuariosDto = userService.getUsers();
+        return ResponseEntity.status(200).body(usuariosDto);
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id){
-        User user = userService.getUserById(id);
-        return ResponseEntity.ok().body(user);
+    public ResponseEntity<UserDto> getUserDtoById(@PathVariable Integer id){
+        UserDto UserDto = userService.getUserById(id);
+        return ResponseEntity.ok().body(UserDto);
     }
 
 

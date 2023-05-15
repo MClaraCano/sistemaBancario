@@ -13,12 +13,9 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Entity
+
 public class UserDto {
 
-    //conecta con BBDD
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String username;
     private String password;

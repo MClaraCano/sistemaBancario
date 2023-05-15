@@ -17,18 +17,18 @@ public class UserService {
     private UserRepository userRepository;
     private UserMapper userMapper;
 
-    public List<User> getUsers(){
-            List<UserDto> usuariosDto = userRepository.findAll();
-            List<User> usuariosUser = usuariosDto.stream()
-                    .map(userMapper::DtoToUserMap)
+    public List<UserDto> getUsers(){
+            List<User> usuariosUser = userRepository.findAll();
+            List<UserDto> usuariosUDto = usuariosUser.stream()
+                    .map(userMapper::UserToDtoMap)
                     .collect(Collectors.toList());
-        return usuariosUser;
+        return usuariosUDto;
     }
 
-    public User getUserById(Integer id){
-        UserDto userDto = userRepository.findById(id).orElse(null);
-        User user = userMapper.DtoToUserMap(userDto);
-        return user;
+    public UserDto getUserById(Integer id){
+        User user = userRepository.findById(id).orElse(null);
+        UserDto userDto = userMapper.UserToDtoMap(user);
+        return userDto;
     }
 
 
