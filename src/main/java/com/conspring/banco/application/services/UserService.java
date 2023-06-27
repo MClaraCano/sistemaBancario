@@ -1,9 +1,9 @@
-package com.conspring.banco.services;
+package com.conspring.banco.application.services;
 
-import com.conspring.banco.mappers.UserMapper;
-import com.conspring.banco.models.User;
-import com.conspring.banco.models.dtos.UserDto;
-import com.conspring.banco.repositories.UserRepository;
+import com.conspring.banco.api.mappers.UserMapper;
+import com.conspring.banco.domain.models.User;
+import com.conspring.banco.api.dtos.UserDto;
+import com.conspring.banco.infrastructure.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +17,11 @@ public class UserService {
     private UserRepository userRepository;
     private UserMapper userMapper;
 
+
     public List<UserDto> getUsers(){
             List<User> usuariosUser = userRepository.findAll();
             List<UserDto> usuariosUDto = usuariosUser.stream()
-                    .map(userMapper::UserToDtoMap)
+                    .map(UserMapper::UserToDtoMap)
                     .collect(Collectors.toList());
         return usuariosUDto;
     }
@@ -29,6 +30,22 @@ public class UserService {
         User user = userRepository.findById(id).orElse(null);
         UserDto userDto = userMapper.UserToDtoMap(user);
         return userDto;
+    }
+
+    public UserDto createUser (User user){
+        userRepository.save(user);
+        UserDto userDto = userMapper.UserToDtoMap(user);
+        return userDto;
+    }
+
+    public UserDto modificarUser(User user) {
+        userRepository.save(user);
+        UserDto userDto = userMapper.UserToDtoMap(user);
+        return userDto;
+    }
+
+    public void borrarById (Integer id){
+        userRepository.deleteById(id);
     }
 
 

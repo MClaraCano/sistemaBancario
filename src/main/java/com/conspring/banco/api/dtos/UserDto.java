@@ -1,4 +1,4 @@
-package com.conspring.banco.models.dtos;
+package com.conspring.banco.api.dtos;
 
 import lombok.*;
 
