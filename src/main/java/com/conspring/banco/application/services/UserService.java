@@ -15,7 +15,7 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-    private UserMapper userMapper;
+    //private UserMapper userMapper;
 
 
     public List<UserDto> getUsers(){
@@ -28,19 +28,19 @@ public class UserService {
 
     public UserDto getUserById(Integer id){
         User user = userRepository.findById(id).orElse(null);
-        UserDto userDto = userMapper.UserToDtoMap(user);
+        UserDto userDto = UserMapper.UserToDtoMap(user);
         return userDto;
     }
 
     public UserDto createUser (User user){
         userRepository.save(user);
-        UserDto userDto = userMapper.UserToDtoMap(user);
+        UserDto userDto = UserMapper.UserToDtoMap(user);
         return userDto;
     }
 
     public UserDto modificarUser(User user) {
         userRepository.save(user);
-        UserDto userDto = userMapper.UserToDtoMap(user);
+        UserDto userDto = UserMapper.UserToDtoMap(user);
         return userDto;
     }
 
