@@ -1,9 +1,11 @@
-package com.conspring.banco.mappers;
+package com.conspring.banco.api.mappers;
 
-import com.conspring.banco.models.User;
-import com.conspring.banco.models.dtos.UserDto;
+import com.conspring.banco.domain.models.User;
+import com.conspring.banco.api.dtos.UserDto;
+import lombok.experimental.UtilityClass;
 
-//@UtilityClass // para configurar la clase y poder trabajarla como interfaz para mapear
+@UtilityClass // para configurar la clase y poder trabajarla como interfaz para mapear
+// Para indicar que es una clase de mapeo de configuración
 public class UserMapper {
 
     //Con @Builder

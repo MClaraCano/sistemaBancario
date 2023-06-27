@@ -1,7 +1,6 @@
-package com.conspring.banco.repositories;
+package com.conspring.banco.infrastructure.repositories;
 
-import com.conspring.banco.models.User;
-import com.conspring.banco.models.dtos.UserDto;
+import com.conspring.banco.domain.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

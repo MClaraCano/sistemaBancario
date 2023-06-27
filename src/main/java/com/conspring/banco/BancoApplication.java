@@ -1,10 +1,12 @@
 package com.conspring.banco;
 
-import com.conspring.banco.models.dtos.UserDto;
+import com.conspring.banco.api.dtos.UserDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@EnableJpaRepositories // habilitamos al proyecto trabajar con los repo
 public class BancoApplication {
 
 	public static void main(String[] args) {

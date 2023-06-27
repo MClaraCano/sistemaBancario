@@ -1,10 +1,7 @@
-package com.conspring.banco.models;
-
-import lombok.Builder;
-
+package com.conspring.banco.domain.models;
 import javax.persistence.*;
-import java.util.Date;
 
+// @Table (name = "USUARIOS") -> si se quiere un nombre dist. a la Tabla de la Clase
 @Entity
 public class User {
 
