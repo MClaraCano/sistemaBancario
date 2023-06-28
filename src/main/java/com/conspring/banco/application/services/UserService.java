@@ -1,6 +1,9 @@
 package com.conspring.banco.application.services;
 
+import com.conspring.banco.api.dtos.AccountDto;
+import com.conspring.banco.api.mappers.AccountMapper;
 import com.conspring.banco.api.mappers.UserMapper;
+import com.conspring.banco.domain.models.Account;
 import com.conspring.banco.domain.models.User;
 import com.conspring.banco.api.dtos.UserDto;
 import com.conspring.banco.infrastructure.repositories.UserRepository;
@@ -32,15 +35,19 @@ public class UserService {
         return userDto;
     }
 
-    public UserDto createUser (User user){
-        userRepository.save(user);
-        UserDto userDto = UserMapper.UserToDtoMap(user);
+    public UserDto createUser (UserDto userDto){
+        User user = userRepository.save(UserMapper.DtoToUserMap(userDto));
+        userDto = UserMapper.UserToDtoMap(user);
         return userDto;
     }
 
-    public UserDto modificarUser(User user) {
-        userRepository.save(user);
-        UserDto userDto = UserMapper.UserToDtoMap(user);
+    public UserDto modificarUser(UserDto userDto) {
+        User user = userRepository.save(User.builder()
+                .id(userDto.getId())
+                .username(userDto.getUsername())
+                .password(userDto.getPassword())
+                .build());
+        userDto = UserMapper.UserToDtoMap(user);
         return userDto;
     }
 

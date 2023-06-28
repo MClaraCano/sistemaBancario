@@ -31,9 +31,9 @@ public class AccountService {
         return accountDto;
     }
 
-    public AccountDto crearCuenta(Account account){
-        account = accountRepository.save(account);
-        AccountDto accountDto = AccountMapper.accountToDto(account);
+    public AccountDto crearCuenta(AccountDto accountDto){
+        Account account = accountRepository.save(AccountMapper.dtoToAccount(accountDto));
+        accountDto = AccountMapper.accountToDto(account);
         return accountDto;
     }
 

@@ -1,7 +1,14 @@
 package com.conspring.banco.domain.models;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 // @Table (name = "USUARIOS") -> si se quiere un nombre dist. a la Tabla de la Clase
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class User {
 
@@ -16,16 +23,6 @@ public class User {
     //@Column(name = "FECHA") // nombre de columna en BBDD
     //@Temporal(TemporalType.TIMESTAMP) //reemplaza el Date de Java
     //private Date date;
-
-
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public User() {
-    }
 
     public Integer getId() {
         return id;

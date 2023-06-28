@@ -29,13 +29,13 @@ public class AccountController {
     }
 
     @PostMapping("/crearcuenta")
-    public ResponseEntity<AccountDto> crearCuenta(@RequestBody Account account){
-        AccountDto accountDto = accountService.crearCuenta(account);
+    public ResponseEntity<AccountDto> crearCuenta(@RequestBody AccountDto accountDto){
+        accountDto = accountService.crearCuenta(accountDto);
         return ResponseEntity.status(201).body(accountDto);
     }
 
     @PutMapping("/modificarcuenta")
-    public ResponseEntity<AccountDto> modificarCuenta (AccountDto accountDto){
+    public ResponseEntity<AccountDto> modificarCuenta (@RequestBody AccountDto accountDto){
         accountDto = accountService.modificarCuenta(accountDto);
         return ResponseEntity.status(200).body(accountDto);
     }
