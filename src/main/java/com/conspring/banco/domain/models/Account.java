@@ -5,12 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
 public class Account {
 
     @Id
@@ -20,5 +20,9 @@ public class Account {
     private int num_cuenta;
 
     private BigDecimal saldo;
-    //private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

@@ -1,5 +1,6 @@
 package com.conspring.banco.api.controllers;
 
+import com.conspring.banco.domain.exceptions.NoSeEncontroE;
 import com.conspring.banco.domain.models.User;
 import com.conspring.banco.api.dtos.UserDto;
 import com.conspring.banco.application.services.UserService;
@@ -41,7 +42,7 @@ public class UserController {
     }
 
     @PutMapping("/usermod")
-    public ResponseEntity<UserDto> modificarUser(@RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> modificarUser(@RequestBody UserDto userDto) throws NoSeEncontroE {
         userDto = userService.modificarUser(userDto);
         return ResponseEntity.ok().body(userDto);
     }
