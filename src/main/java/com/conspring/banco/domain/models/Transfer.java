@@ -29,6 +29,7 @@ public class Transfer {
     private Account cuenta_destino;
 
     private Date fecha;
+
     private BigDecimal saldo;
 
 }

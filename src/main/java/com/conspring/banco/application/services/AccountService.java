@@ -4,10 +4,12 @@ import com.conspring.banco.api.dtos.AccountDto;
 import com.conspring.banco.api.mappers.AccountMapper;
 import com.conspring.banco.domain.exceptions.NoSeEncontroE;
 import com.conspring.banco.domain.models.Account;
+import com.conspring.banco.domain.models.User;
 import com.conspring.banco.infrastructure.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,6 +19,15 @@ public class AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    public Account buscarPorId(Long id) throws NoSeEncontroE {
+        if (id != null){
+            Account account = accountRepository.findById(id).orElse(null);
+            return account;
+        } else {
+            throw new NoSeEncontroE("Debe ingresar un ID");
+        }
+    }
 
     public List<AccountDto> getCuentas(){
         List<Account> listaCuentas = accountRepository.findAll();
@@ -73,7 +84,50 @@ public class AccountService {
     }
 
 
+
+
+    //Métodos de ingreso y egreso de dinero
+
+
+    public BigDecimal egresarDinero(BigDecimal monto, Long id) throws NoSeEncontroE {
+        //1. Buscar cuenta por ID
+        Account account = buscarPorId(id);
+        //2. Recuperar el saldo de la cuenta
+        BigDecimal saldo = account.getSaldo();
+
+        //3. Validar si hay dinero disponible en cuenta
+        if (saldo.compareTo(monto) >= 1) {
+
+            //4. Restar el monto al saldo de la cuenta
+            BigDecimal nuevoSaldo = saldo.subtract(monto);
+
+            //5. Devolvemor el nuevo saldo de la cuenta
+            return nuevoSaldo;
+
+        } else {
+            throw new NoSeEncontroE("El monto a debitar es mayor al saldo");
+        }
+    }
+
+    public BigDecimal ingresarDinero(BigDecimal monto, Long id) throws NoSeEncontroE {
+        //1. Buscar cuenta por ID
+        Account account = buscarPorId(id);
+
+        //2. Recuperar el saldo de la cuenta
+        BigDecimal saldo = account.getSaldo();
+
+        //4. Sumar el monto al saldo de la cuenta
+        BigDecimal nuevoSaldo = saldo.add(monto);
+
+        //5. Devolvemor el nuevo saldo de la cuenta
+        return nuevoSaldo;
+
+        }
+
 }
+
+
+
 
 /*
         // Error a corregir: Si no existe el ID, crea uno nuevo con los parámetros enviados

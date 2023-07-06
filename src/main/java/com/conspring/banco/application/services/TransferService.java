@@ -60,5 +60,11 @@ public class TransferService {
 
 
 
+    // TODO: Agregar validaciones. Antes de intentar hacer transf
+    // - Cuentas existentes
+    // - Dinero suficiente en cuenta (mínimo o máximo)
+    // - Saldo disponible
+    // - Que otra cuenta haya recibido el dinero
+
 
 }

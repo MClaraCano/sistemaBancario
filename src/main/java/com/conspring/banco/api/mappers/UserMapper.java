@@ -14,6 +14,7 @@ public class UserMapper {
                 .id(user.getId())
                 .username(user.getUsername())
                 .password(user.getPassword())
+                .cuentas_usuario(user.getCuentas_usuario())
                 .build();
         return userDto;
     }
@@ -24,6 +25,7 @@ public class UserMapper {
         user.setId(userDto.getId());
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
+        user.setCuentas_usuario(userDto.getCuentas_usuario());
         return user;
     }
 

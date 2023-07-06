@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserDto> getUserDtoById(@PathVariable Integer id){
+    public ResponseEntity<UserDto> getUserDtoById(@PathVariable Long id){
         UserDto UserDto = userService.getUserById(id);
         return ResponseEntity.ok().body(UserDto);
     }
@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @DeleteMapping("/userdelete/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Integer id){
+    public ResponseEntity<String> deleteById(@PathVariable Long id){
         userService.borrarById(id);
         return ResponseEntity.ok().body("Usuario eliminado correctamente");
     }

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -23,6 +24,14 @@ public class Account {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User owner;
+
+    /*
+    @OneToMany(mappedBy = "cuenta_origen")
+    private List<Transfer> origen_transfer_list;
+
+    @OneToMany(mappedBy = "cuenta_destino")
+    private List<Transfer> destino_transfer_list;
+     */
 
 }
