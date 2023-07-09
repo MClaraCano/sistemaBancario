@@ -18,6 +18,8 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //TODO: num cuenta debe ser único
+    //@Column(unique = true)
     private int num_cuenta;
 
     private BigDecimal saldo;
@@ -26,12 +28,5 @@ public class Account {
     @JoinColumn(name = "user_id")
     private User owner;
 
-    /*
-    @OneToMany(mappedBy = "cuenta_origen")
-    private List<Transfer> origen_transfer_list;
-
-    @OneToMany(mappedBy = "cuenta_destino")
-    private List<Transfer> destino_transfer_list;
-     */
 
 }

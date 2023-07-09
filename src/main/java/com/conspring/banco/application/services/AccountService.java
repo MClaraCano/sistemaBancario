@@ -1,9 +1,12 @@
 package com.conspring.banco.application.services;
 
 import com.conspring.banco.api.dtos.AccountDto;
+import com.conspring.banco.api.dtos.UserDto;
 import com.conspring.banco.api.mappers.AccountMapper;
+import com.conspring.banco.api.mappers.UserMapper;
 import com.conspring.banco.domain.exceptions.NoSeEncontroE;
 import com.conspring.banco.domain.models.Account;
+import com.conspring.banco.domain.models.Transfer;
 import com.conspring.banco.domain.models.User;
 import com.conspring.banco.infrastructure.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,29 +62,46 @@ public class AccountService {
 
 
     // MODIFICAR
-    public AccountDto modificarCuenta(Long id, AccountDto accountDto) throws NoSeEncontroE {
 
+    public AccountDto modificarCuenta(Long id, AccountDto accountDto){
+        //busco ID con account
+        Account account = accountRepository.findById(id).orElse(null);
+
+        //paso DTO a account para poder setearle el ID encontrado
+        Account accountActualizada = AccountMapper.dtoToAccount(accountDto);
+        accountActualizada.setId(account.getId());
+
+        //salvo los cambios en la accountActualizada
+        accountRepository.save(accountActualizada);
+
+        //convierto a DTO para poder devolverla
+        accountDto = AccountMapper.accountToDto(accountActualizada);
+        return accountDto;
+
+    }
+
+
+
+    /* OTRA OPCION MODIFICAR
+    public AccountDto modificarCuenta(Long id, AccountDto accountDto) throws NoSeEncontroE {
         Optional<Account> accountCreadaPorId = accountRepository.findById(id);
 
         if (accountCreadaPorId.isPresent()){
-
             //para trabajar sólo con la entidad (con id) del Optional
             Account entidad = accountCreadaPorId.get();
-
             //pasamos a account el dto que pasamos como parámetro, para poder trabajarlo
             Account accountAModificar = AccountMapper.dtoToAccount(accountDto);
-
             //seteamos el id de la account con la entidad buscada por id
             accountAModificar.setId(entidad.getId());
-
             Account accountNueva = accountRepository.save(accountAModificar);
             AccountDto accountDtoADevolver = AccountMapper.accountToDto(accountNueva);
             return accountDtoADevolver;
-
         } else {
             throw new NoSeEncontroE("No se encontró la cuenta del ID: " + id);
         }
     }
+     */
+
 
 
 
@@ -124,23 +144,14 @@ public class AccountService {
 
         }
 
+        //TODO: Crear un método para poder buscar una cuenta por su número
+
+
+
 }
 
 
 
 
-/*
-        // Error a corregir: Si no existe el ID, crea uno nuevo con los parámetros enviados
 
-        public AccountDto modificarCuenta(AccountDto accountDto) {
-        Account account = accountRepository.save(Account.builder()
-                        .id(accountDto.getId())
-                        .num_cuenta(accountDto.getNum_cuenta())
-                        .saldo(accountDto.getSaldo())
-                        .build());
-        accountDto = AccountMapper.accountToDto(account);
-        return accountDto;
-    }
-
- */
 

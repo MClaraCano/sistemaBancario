@@ -3,7 +3,6 @@ package com.conspring.banco.api.controllers;
 import com.conspring.banco.api.dtos.TransferDto;
 import com.conspring.banco.application.services.TransferService;
 import com.conspring.banco.domain.exceptions.NoSeEncontroE;
-import com.conspring.banco.domain.models.Transfer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,5 +38,11 @@ public class TransferController {
     public ResponseEntity<TransferDto> modificarTransfer(@RequestBody TransferDto transferDto) throws NoSeEncontroE {
         transferDto = transferService.modificarTransfer(transferDto);
         return ResponseEntity.status(200).body(transferDto);
+    }
+
+    @DeleteMapping("/borrarTransfer")
+    public ResponseEntity<String> eliminarTransfer(@PathVariable Long id){
+        String mensaje = transferService.eliminarTransfer(id);
+        return ResponseEntity.status(200).body(mensaje);
     }
 }

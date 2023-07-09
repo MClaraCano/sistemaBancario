@@ -20,16 +20,11 @@ public class Transfer {
     @Column(name = "transfer_id")
     Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "cuenta_origen_id", nullable = false)
-    private Account cuenta_origen;
-
-    @ManyToOne
-    @JoinColumn(name = "cuenta_destino_id", nullable = false)
-    private Account cuenta_destino;
-
+    private int cuenta_origen;
+    private int cuenta_destino;
     private Date fecha;
+    private BigDecimal monto;
 
-    private BigDecimal saldo;
+
 
 }

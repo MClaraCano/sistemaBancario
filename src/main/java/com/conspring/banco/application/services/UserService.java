@@ -66,6 +66,7 @@ public class UserService {
                         .id(userDto.getId())
                         .username(userDto.getUsername())
                         .password(userDto.getPassword())
+                        .cuentas_usuario(userDto.getCuentas_usuario())
                         .build());
                 userDto = UserMapper.UserToDtoMap(user);
                 return userDto;
@@ -91,9 +92,10 @@ public class UserService {
         User user = buscarPorId(id);
         UserDto userDto = UserMapper.UserToDtoMap(user);
 
-        //2. Añadir la cuenta a la lista de user encontrado
-        List<AccountDto> listaCuentas = userDto.getCuentas_usuario();
-        listaCuentas.add(accountDto);
+        //2. Añadir la cuenta a la lista de user encontrada
+        List<Account> listaCuentas = userDto.getCuentas_usuario();
+
+        listaCuentas.add(AccountMapper.dtoToAccount(accountDto));
 
         //3. Devolver usuario con cuenta agregada
         userDto.setCuentas_usuario(listaCuentas);

@@ -13,7 +13,7 @@ public class TransferMapper {
                 .cuenta_origen(transfer.getCuenta_origen())
                 .cuenta_destino(transfer.getCuenta_destino())
                 .fecha(transfer.getFecha())
-                .saldo(transfer.getSaldo())
+                .monto(transfer.getMonto())
                 .build();
         return transferDto;
     }
@@ -24,7 +24,7 @@ public class TransferMapper {
                 .cuenta_origen(transferDto.getCuenta_origen())
                 .cuenta_destino(transferDto.getCuenta_destino())
                 .fecha(transferDto.getFecha())
-                .saldo(transferDto.getSaldo())
+                .monto(transferDto.getMonto())
                 .build();
         return transfer;
         }

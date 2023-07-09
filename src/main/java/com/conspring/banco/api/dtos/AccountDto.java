@@ -15,6 +15,6 @@ public class AccountDto {
     private Long id;
     private int num_cuenta;
     private BigDecimal saldo;
-    private User user;
+    private User owner;
 
 }

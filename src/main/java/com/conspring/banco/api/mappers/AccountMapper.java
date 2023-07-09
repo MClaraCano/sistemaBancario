@@ -13,6 +13,7 @@ public class AccountMapper {
         account.setId(accountDto.getId());
         account.setNum_cuenta(accountDto.getNum_cuenta());
         account.setSaldo(accountDto.getSaldo());
+        account.setOwner(accountDto.getOwner());
         return account;
     }
 
@@ -22,6 +23,7 @@ public class AccountMapper {
                 .id(account.getId())
                 .num_cuenta(account.getNum_cuenta())
                 .saldo(account.getSaldo())
+                .owner(account.getOwner())
                 .build();
         return cuentaDto;
     }

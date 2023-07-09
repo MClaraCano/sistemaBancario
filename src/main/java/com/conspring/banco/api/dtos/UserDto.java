@@ -22,5 +22,5 @@ public class UserDto {
     private String username;
     private String password;
 
-    private List<AccountDto> cuentas_usuario;
+    private List<Account> cuentas_usuario;
 }

@@ -37,7 +37,7 @@ public class AccountController {
     }
 
     @PutMapping("/modificarcuenta/{id}")
-    public ResponseEntity<AccountDto> modificarCuenta (@PathVariable Long id, @RequestBody AccountDto accountDto) throws NoSeEncontroE {
+    public ResponseEntity<AccountDto> modificarCuenta (@PathVariable Long id, @RequestBody AccountDto accountDto){
         accountDto = accountService.modificarCuenta(id, accountDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(accountDto);
     }

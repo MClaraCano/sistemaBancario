@@ -14,9 +14,9 @@ import java.util.Date;
 public class TransferDto {
 
     private long id;
-    private Account cuenta_origen;
-    private Account cuenta_destino;
+    private int cuenta_origen;
+    private int cuenta_destino;
     private Date fecha;
-    private BigDecimal saldo;
+    private BigDecimal monto;
 
 }
