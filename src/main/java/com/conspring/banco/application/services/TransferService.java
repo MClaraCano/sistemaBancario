@@ -33,18 +33,22 @@ public class TransferService {
         return listaDto;
     }
 
-    public Transfer obtenerId(Long id){
-        return transferRepository.findById(id).orElse(null);
+    public Transfer obtenerId(Long id) throws NoSeEncontroE {
+        Transfer transfer = transferRepository.findById(id).orElse(null);
+        if (transfer == null){
+            throw new NoSeEncontroE("No existe el ID " + id);
+        }
+        return transfer;
     }
 
-    public TransferDto getTransferById(Long id){
+
+    public TransferDto getTransferById(Long id) throws NoSeEncontroE {
         Transfer transfer = obtenerId(id);
         TransferDto transferDto = TransferMapper.transferToDto(transfer);
         return transferDto;
     }
 
     public TransferDto crearTransfer(TransferDto transferDto){
-        //TODO: buscar una cuenta por numero de cuenta
         Transfer transfer = transferRepository.save(TransferMapper.dtoToTransfer(transferDto));
         transferDto = TransferMapper.transferToDto(transfer);
         return transferDto;

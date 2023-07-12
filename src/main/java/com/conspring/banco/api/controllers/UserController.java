@@ -27,8 +27,9 @@ public class UserController {
         return ResponseEntity.status(200).body(usuariosDto);
     }
 
+    //TODO: CC cómo mandar msj por Postman avisando que no se encontró el ID
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserDto> getUserDtoById(@PathVariable Long id){
+    public ResponseEntity<UserDto> getUserDtoById(@PathVariable Long id) throws NoSeEncontroE {
         UserDto UserDto = userService.getUserById(id);
         return ResponseEntity.ok().body(UserDto);
     }

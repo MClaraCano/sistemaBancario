@@ -26,15 +26,13 @@ public class UserService {
 
 
     public User buscarPorId(Long id) throws NoSeEncontroE {
-        if (id != null){
-            User user = userRepository.findById(id).orElse(null);
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null){
             return user;
         } else {
-            throw new NoSeEncontroE("Debe ingresar un ID");
+            throw new NoSeEncontroE("El ID no fue encontrado en la BBDD");
         }
     }
-
-
 
     public List<UserDto> getUsers(){
             List<User> usuariosUser = userRepository.findAll();
@@ -44,11 +42,25 @@ public class UserService {
         return usuariosUDto;
     }
 
-    public UserDto getUserById(Long id){
-        User user = userRepository.findById(id).orElse(null);
+    public UserDto getUserById(Long id) throws NoSeEncontroE {
+        User user = buscarPorId(id);
         UserDto userDto = UserMapper.UserToDtoMap(user);
         return userDto;
     }
+
+
+/*
+    public UserDto getUserById(Long id) throws NoSeEncontroE {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null){
+            throw new NoSeEncontroE("No existe el ID " + id);
+        }
+        UserDto userDto = UserMapper.UserToDtoMap(user);
+        return userDto;
+    }
+
+ */
+
 
     public UserDto createUser (UserDto userDto){
         User user = userRepository.save(UserMapper.DtoToUserMap(userDto));
@@ -98,7 +110,13 @@ public class UserService {
         listaCuentas.add(AccountMapper.dtoToAccount(accountDto));
 
         //3. Devolver usuario con cuenta agregada
-        userDto.setCuentas_usuario(listaCuentas);
+        user.setCuentas_usuario(listaCuentas);
+
+        userRepository.save(UserMapper.DtoToUserMap(userDto));
+
+        //convertir a DTO
+        userDto = UserMapper.UserToDtoMap(user);
+
         return userDto;
 
     }

@@ -23,7 +23,7 @@ public class TransferController {
     }
 
     @GetMapping("/transfers/{id}")
-    public ResponseEntity<TransferDto> getTransfer(@PathVariable Long id){
+    public ResponseEntity<TransferDto> getTransfer(@PathVariable Long id) throws NoSeEncontroE {
         TransferDto transferDto = transferService.getTransferById(id);
         return ResponseEntity.status(200).body(transferDto);
     }
