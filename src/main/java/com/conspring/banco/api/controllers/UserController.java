@@ -1,5 +1,6 @@
 package com.conspring.banco.api.controllers;
 
+import com.conspring.banco.domain.exceptions.NoSeEncontroE;
 import com.conspring.banco.domain.models.User;
 import com.conspring.banco.api.dtos.UserDto;
 import com.conspring.banco.application.services.UserService;
@@ -26,8 +27,9 @@ public class UserController {
         return ResponseEntity.status(200).body(usuariosDto);
     }
 
+    //TODO: CC cómo mandar msj por Postman avisando que no se encontró el ID
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserDto> getUserDtoById(@PathVariable Integer id){
+    public ResponseEntity<UserDto> getUserDtoById(@PathVariable Long id) throws NoSeEncontroE {
         UserDto UserDto = userService.getUserById(id);
         return ResponseEntity.ok().body(UserDto);
     }
@@ -35,19 +37,19 @@ public class UserController {
 
 
     @PostMapping("/user")
-    public ResponseEntity<UserDto> createUser(@RequestBody User user){
-        UserDto userDto = userService.createUser(user);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+        userDto = userService.createUser(userDto);
         return ResponseEntity.status(201).body(userDto);
     }
 
     @PutMapping("/usermod")
-    public ResponseEntity<UserDto> modificarUser(@RequestBody User user){
-        UserDto userDto = userService.modificarUser(user);
+    public ResponseEntity<UserDto> modificarUser(@RequestBody UserDto userDto) throws NoSeEncontroE {
+        userDto = userService.modificarUser(userDto);
         return ResponseEntity.ok().body(userDto);
     }
 
     @DeleteMapping("/userdelete/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Integer id){
+    public ResponseEntity<String> deleteById(@PathVariable Long id){
         userService.borrarById(id);
         return ResponseEntity.ok().body("Usuario eliminado correctamente");
     }

@@ -2,8 +2,10 @@ package com.conspring.banco.api.controllers;
 
 import com.conspring.banco.api.dtos.AccountDto;
 import com.conspring.banco.application.services.AccountService;
+import com.conspring.banco.domain.exceptions.NoSeEncontroE;
 import com.conspring.banco.domain.models.Account;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,25 +27,25 @@ public class AccountController {
     @GetMapping("/account/{id}")
     public ResponseEntity<AccountDto> getCuenta(@PathVariable Long id){
         AccountDto accountDto = accountService.getCuenta(id);
-        return ResponseEntity.status(200).body(accountDto);
+        return ResponseEntity.status(HttpStatus.OK).body(accountDto);
     }
 
     @PostMapping("/crearcuenta")
-    public ResponseEntity<AccountDto> crearCuenta(@RequestBody Account account){
-        AccountDto accountDto = accountService.crearCuenta(account);
-        return ResponseEntity.status(201).body(accountDto);
+    public ResponseEntity<AccountDto> crearCuenta(@RequestBody AccountDto accountDto){
+        accountDto = accountService.crearCuenta(accountDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(accountDto);
     }
 
-    @PutMapping("/modificarcuenta")
-    public ResponseEntity<AccountDto> modificarCuenta (AccountDto accountDto){
-        accountDto = accountService.modificarCuenta(accountDto);
-        return ResponseEntity.status(200).body(accountDto);
+    @PutMapping("/modificarcuenta/{id}")
+    public ResponseEntity<AccountDto> modificarCuenta (@PathVariable Long id, @RequestBody AccountDto accountDto){
+        accountDto = accountService.modificarCuenta(id, accountDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(accountDto);
     }
 
     @DeleteMapping("/eliminarcuenta/{id}")
     public ResponseEntity<String> eliminarCuenta(@PathVariable Long id){
-        accountService.eliminarCuenta(id);
-        return ResponseEntity.status(200).body("Cuenta eliminada de manera exitosa");
+        //Al poner eso en el body, se usa el String definido en el service
+        return ResponseEntity.status(HttpStatus.OK).body(accountService.eliminarCuenta(id));
     }
 
 
